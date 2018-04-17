@@ -23,4 +23,4 @@ RUN chmod +x /usr/local/bin/docker
 # Install azure-iot-edge-runtime-ctl
 RUN pip3 install -U azure-iot-edge-runtime-ctl
 
-CMD ["/bin/sh", "/app/startIotEdgeDevice.sh"]
+CMD ["/bin/sh", "/app/startEdge.sh"]
