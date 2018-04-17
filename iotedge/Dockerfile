@@ -1,8 +1,15 @@
 FROM resin/armv7hf-debian
 
 # Install Python and pip
-RUN apt-get update && apt-get install -y --no-install-recommends python3 python3-pip 
+RUN apt-get update
+RUN apt-get install -y --no-install-recommends gcc python3 python3-pip 
+RUN apt-get install -y --no-install-recommends libffi-dev 
+RUN apt-get install -y --no-install-recommends libssl-dev
+RUN apt-get install -y --no-install-recommends python3-dev 
 RUN pip3 install --upgrade setuptools pip
+RUN pip install cffi
+RUN easy_install -U setuptools
+
 
 COPY ./app /app
 COPY ./azure-iotedge-runtime /azure-iotedge-runtime
