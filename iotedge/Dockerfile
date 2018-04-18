@@ -14,13 +14,17 @@ RUN easy_install -U setuptools
 COPY ./app /app
 COPY ./azure-iotedge-runtime /azure-iotedge-runtime
 
-# Install balena & create docker "symlink" 
-RUN apt-get install -y curl
-RUN curl -sfL https://balena.io/install.sh | sh
-COPY docker /usr/local/bin
-RUN chmod +x /usr/local/bin/docker
-
 # Install azure-iot-edge-runtime-ctl
 RUN pip3 install -U azure-iot-edge-runtime-ctl
+
+# Install balena & create docker "symlink" 
+RUN apt-get install -y curl
+
+RUN apt-get install --only-upgrade tar
+
+RUN curl -sL https://github.com/resin-os/balena/releases/download/17.06-rev1/balena-17.06-rev1-armv7.tar.gz | tar xzv -C /usr/local/bin --strip-components=1
+
+COPY docker /usr/local/bin
+RUN chmod +x /usr/local/bin/docker
 
 CMD ["/bin/sh", "/app/startEdge.sh"]

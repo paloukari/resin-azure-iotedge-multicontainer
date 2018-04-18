@@ -1,5 +1,6 @@
 ﻿#!/bin/sh
 echo "Building custom Docker Image"
+
 docker build -t local/azure-iotedge-runtime-resin:latest /azure-iotedge-runtime
 
 echo "Adding Device Connection String to config file"
